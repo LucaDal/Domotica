@@ -34,7 +34,7 @@ const char *password = "2piedinidimoira";
 
 int umid_to_water = 0;
 int ml_to_give = 0;
-int sec_to_water = 0;
+int millisec_to_adjust_water = 0;
 int ora_a = 0;
 int min_a = 0;
 
@@ -54,12 +54,10 @@ bool check = false;
 bool checkAfterMilliliters = true;
 bool waitToCheck = false;
 
-float waterInterval;
-
 unsigned long previousMillisData = 0;
-const long intervalData = 1000;
+const unsigned long intervalData = 1000;
 unsigned long previousMillisDisplay = 0;
-long intervalDisplay = 1000;
+unsigned long intervalDisplay = 1000;
 bool displayState = false;
 bool motorState = false;
 bool dataIsRead = false;
@@ -116,23 +114,22 @@ void setup() {
   }
   //Leggo i parametri dal sito
   readData();
-  waterInterval = sec_to_water * 1000;
-  millisWateringTime = ((ml_to_give * 200) / 5) + waterInterval;  // 20000/500 millesimi/ml -- ci ha messo 20 secondi per fare mezzo litro
+  millisWateringTime = ((ml_to_give * 200) / 5) + millisec_to_adjust_water;  // 20000/500 millesimi/ml -- ci ha messo 20 secondi per fare mezzo litro
 
 
   display.clearDisplay();
   printOnScreen((String)umid_to_water, 2, 0, 0);
-  printOnScreen("%", 2, 25, 0);
-  printOnScreen((String)ml_to_give, 2, 45, 0);
-  printOnScreen((String)sec_to_water, 2, 0, 16);
-  printOnScreen(",", 2, 28, 20);
+  printOnScreen("%", 2, 30, 0);
+  printOnScreen((String)ml_to_give, 2, 50, 0);
+  printOnScreen((String)millisec_to_adjust_water, 2, 0, 16);
+  printOnScreen(",", 2, 28, 16);
   printOnScreen((String)ora_a, 2, 38, 16);
   printOnScreen(":", 2, 66, 16);
   printOnScreen((String)min_a, 2, 70, 16);
 
   //Messaggio di benvenuto----------------
 
-  delay(2000);
+  delay(3000);
   display.clearDisplay();
   printOnScreen("Welcome", 2, 0, 0);
   display.clearDisplay();
@@ -160,7 +157,7 @@ void sendDataToSite(String ora, String minn, String temp_aria, String temp_terre
   if ((WiFi.status() == WL_CONNECTED)) {
     Serial.print("[HTTPS] begin...\n");
     http.begin(client, "http://dalessandroluca.altervista.org/Projects/sentFromPlant.php?device_name=oJd4K&ora=" + ora + "&min=" + minn + "&temp_aria=" + temp_aria + "&temp_terreno=" + temp_terreno + "&umid_aria=" + umid_aria + "&umid_terreno=" + umid_terreno);
-    int httpCode = http.GET();
+    http.GET();
     http.end();
   }
 }
@@ -181,7 +178,7 @@ void readData(void) {
   int index = 0;
   umid_to_water = EEPROM.read(index);
   ml_to_give = getValureFromEEPROM(&index);
-  sec_to_water = getValureFromEEPROM(&index);
+  millisec_to_adjust_water = getValureFromEEPROM(&index);
   ora_a = EEPROM.read(++index);
   min_a = EEPROM.read(++index);
 }
@@ -189,13 +186,13 @@ void readData(void) {
 
 void writeStringToEEPROM(int *index, String str, bool *flag) {
 
-  for (int i = 0; i < 5 - str.length(); i++) {  //max value is 99999
+  for (unsigned int i = 0; i < 5 - str.length(); i++) {  //max value is 99999
     if ('0' != EEPROM.read(++(*index))) {
       EEPROM.write(*index, '0');
       *flag = true;
     }
   }
-  for (int i = 0; i < str.length(); i++) {
+  for (unsigned int i = 0; i < str.length(); i++) {
     if (str.charAt(i) != EEPROM.read(++(*index))) {
       EEPROM.write(*index, str.charAt(i));
       *flag = true;
@@ -357,11 +354,11 @@ void loop() {
     if (!displayState) {
       //display.clearDisplay();
       printOnScreen(HA, 2, 0, 0);
-      printOnScreen("%", 2, 25, 0);
-      printOnScreen(TA, 2, 55, 0);
+      printOnScreen("%", 2, 30, 0);
+      printOnScreen(TA, 2, 60, 0);
       printOnScreen((String)HT, 2, 0, 16);
-      printOnScreen("%", 2, 25, 16);
-      printOnScreen(TT, 2, 55, 16);
+      printOnScreen("%", 2, 30, 16);
+      printOnScreen(TT, 2, 60, 16);
       displayState = true;
       if(intervalDisplay > 1000){
         intervalDisplay -= 3000;
