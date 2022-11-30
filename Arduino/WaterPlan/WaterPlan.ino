@@ -40,7 +40,7 @@ int min_a = 0;
 
 int min_sent_data;
 bool data_sent = false;
-int minToSetFleg = false;
+int minToSetFleg;
 
 String HA;
 String TA;
@@ -55,9 +55,9 @@ bool checkAfterMilliliters = true;
 bool waitToCheck = false;
 
 unsigned long previousMillisData = 0;
-const unsigned long intervalData = 1000;
+const unsigned long intervalData = 4000;
 unsigned long previousMillisDisplay = 0;
-unsigned long intervalDisplay = 1000;
+unsigned long intervalDisplay = 4000;
 bool displayState = false;
 bool motorState = false;
 bool dataIsRead = false;
@@ -88,12 +88,9 @@ void setup() {
   dht.begin();
   if (!rtc.begin()) {
     display.clearDisplay();
-    printOnScreen("RTC error", 1, 0, 0);
+    printOnScreen("RTC error", 2, 0, 0);
     delay(2000);
-  }else{
-    //rtc.adjust(DateTime(2022, 11, 12, 24, 8, 00));
   }
-
 
   int cont = 20;
   while ((WiFi.status() != WL_CONNECTED) || cont == 0) {
@@ -309,8 +306,10 @@ void loop() {
   if (data_sent == false && (minInt == 30 || minInt == 0)) {
     data_sent = true;
     minToSetFleg = minInt;
-    //sendDataToSite(*ora,hours,*temp_aria,*temp_terreno,*umid_aria,*umid_terreno)
-    sendDataToSite(hours, minss, TA, TT, HA, (String)HT);
+    if(TT.toInt() <= 100 && hourInt <= 24){
+      sendDataToSite(hours, minss, TA, TT, HA, (String)HT);
+      delay(50);
+    }
   }
   if (minInt != minToSetFleg) {
     data_sent = false;
@@ -354,22 +353,18 @@ void loop() {
     if (!displayState) {
       //display.clearDisplay();
       printOnScreen(HA, 2, 0, 0);
-      printOnScreen("%", 2, 30, 0);
+      printOnScreen("%", 2, 33, 0);
       printOnScreen(TA, 2, 60, 0);
       printOnScreen((String)HT, 2, 0, 16);
-      printOnScreen("%", 2, 30, 16);
+      printOnScreen("%", 2, 33, 16);
       printOnScreen(TT, 2, 60, 16);
       displayState = true;
-      if(intervalDisplay > 1000){
-        intervalDisplay -= 3000;
-      }
+      intervalDisplay -= 3000; //display will last 1 second
+      
     } else {
       display.clearDisplay();
       display.display();
-      intervalDisplay += 3000;
-      //printOnScreen(hours,1,0,0);
-      //printOnScreen(":",1,25,0);
-      //printOnScreen(minss,1,55,0);
+      intervalDisplay += 3000; //black display will last 4 second
       displayState = false;
     }
   }
