@@ -40,6 +40,7 @@ int min_a = 0;
 
 int min_sent_data;
 bool data_sent = false;
+int cont_data = 0;
 int minToSetFleg;
 
 String HA;
@@ -86,9 +87,17 @@ void setup() {
   pinMode(MOTOR, OUTPUT);
 
   dht.begin();
+
   if (!rtc.begin()) {
     display.clearDisplay();
     printOnScreen("RTC error", 2, 0, 0);
+    delay(2000);
+  } else {
+    display.clearDisplay();
+    DateTime now = rtc.now();
+    printOnScreen((String)now.hour(), 2, 0, 0);
+    printOnScreen(":", 2, 25, 0);
+    printOnScreen((String)now.minute(), 2, 55, 0);
     delay(2000);
   }
 
@@ -130,13 +139,6 @@ void setup() {
   display.clearDisplay();
   printOnScreen("Welcome", 2, 0, 0);
   display.clearDisplay();
-
-  //inizializzo le variabili;-------------
-  HA = (String)((int)dht.readHumidity());
-  TA = (String)dht.readTemperature();
-  HT = ((int)sht20.readHumidity());
-  TT = (String)sht20.readTemperature();
-  dataIsRead = true;
   delay(1000);
 }
 
@@ -302,38 +304,24 @@ void loop() {
   }
 
 
-  // INVIO DATI------------------------------------------------------------
-  if (data_sent == false && (minInt == 30 || minInt == 0)) {
-    data_sent = true;
-    minToSetFleg = minInt;
-    if(TT.toInt() <= 100 && hourInt <= 24){
-      sendDataToSite(hours, minss, TA, TT, HA, (String)HT);
-      delay(50);
-    }
-  }
-  if (minInt != minToSetFleg) {
-    data_sent = false;
-  }
-
-
   //IRRIGAZIONE -----------------------------------------------------------
   // if millilitri = 0 -> automatico
   if (!annaffiato) {
-   // if ((hourInt >= ora_a) && (hourInt <= (ora_a + 10))) {
-      if (currentMillis - timer >= millisWateringTime) {
-        timer = currentMillis;
-        if (!motorState) {
-          digitalWrite(MOTOR, HIGH);
-          motorState = true;
-        } else {
-          digitalWrite(MOTOR, LOW);
-          motorState = false;
-          waitToCheck = true;
-          annaffiato = true;
-          //mi server per il controllo sotto, altrimenti entra subito nel timer;
-        }
+    // if ((hourInt >= ora_a) && (hourInt <= (ora_a + 10))) {
+    if (currentMillis - timer >= millisWateringTime) {
+      timer = currentMillis;
+      if (!motorState) {
+        digitalWrite(MOTOR, HIGH);
+        motorState = true;
+      } else {
+        digitalWrite(MOTOR, LOW);
+        motorState = false;
+        waitToCheck = true;
+        annaffiato = true;
+        //mi server per il controllo sotto, altrimenti entra subito nel timer;
       }
-   // }
+    }
+    // }
   }
   //controllo HT dopo tot tempo altrimenti torna falso dopo l'irrigazione a millilitri
 
@@ -359,13 +347,27 @@ void loop() {
       printOnScreen("%", 2, 33, 16);
       printOnScreen(TT, 2, 60, 16);
       displayState = true;
-      intervalDisplay -= 3000; //display will last 1 second
-      
+      intervalDisplay -= 3000;  //display will last 1 second
+
     } else {
       display.clearDisplay();
       display.display();
-      intervalDisplay += 3000; //black display will last 4 second
+      intervalDisplay += 3000;  //black display will last 4 second
       displayState = false;
     }
+  }
+
+
+  // INVIO DATI------------------------------------------------------------
+  if(minInt == 10 || minInt == 35 ){
+    data_sent = false;
+  }
+
+  if (data_sent == false  && (minInt == 30 || minInt == 0)) {
+    data_sent = true;
+    minToSetFleg = minInt;
+    display.clearDisplay();
+    printOnScreen("Sending data", 2, 0, 0);
+    sendDataToSite(hours, minss, TA, TT, HA, (String)HT);
   }
 }
