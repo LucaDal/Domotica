@@ -38,11 +38,11 @@ int millisec_to_adjust_water = 0;
 int ora_a = 0;
 int min_a = 0;
 
-int min_sent_data;
-bool data_sent = false;
-int cont_data = 0;
+int next_update = 0;  //minute to send data
 int minToSetFleg;
 
+int hourInt;
+int minInt;
 String HA;
 String TA;
 int HT;
@@ -56,16 +56,14 @@ bool checkAfterMilliliters = true;
 bool waitToCheck = false;
 
 unsigned long previousMillisData = 0;
-const unsigned long intervalData = 4000;
+const unsigned long intervalData = 10000;  //acquisition time and data
 unsigned long previousMillisDisplay = 0;
-unsigned long intervalDisplay = 4000;
+unsigned long intervalDisplay = 2000; //start displaing data for 2 second
 bool displayState = false;
 bool motorState = false;
 bool dataIsRead = false;
 
-
 void setup() {
-
   // inizializzo i sensori:
   Wire.begin(2, 0);
   WiFi.begin(ssid, password);
@@ -74,7 +72,6 @@ void setup() {
   delay(100);
   sht20.checkSHT20();
   EEPROM.begin(512);
-
 
   //GPIO 1 (TX) swap the pin to a GPIO.
   pinMode(MOTOR, FUNCTION_3);
@@ -85,21 +82,7 @@ void setup() {
   //GPIO 3 (RX) swap the pin to a RX.
   //pinMode(3, FUNCTION_0);
   pinMode(MOTOR, OUTPUT);
-
   dht.begin();
-
-  if (!rtc.begin()) {
-    display.clearDisplay();
-    printOnScreen("RTC error", 2, 0, 0);
-    delay(2000);
-  } else {
-    display.clearDisplay();
-    DateTime now = rtc.now();
-    printOnScreen((String)now.hour(), 2, 0, 0);
-    printOnScreen(":", 2, 25, 0);
-    printOnScreen((String)now.minute(), 2, 55, 0);
-    delay(2000);
-  }
 
   int cont = 20;
   while ((WiFi.status() != WL_CONNECTED) || cont == 0) {
@@ -119,27 +102,47 @@ void setup() {
     delay(2000);
   }
   //Leggo i parametri dal sito
-  readData();
-  millisWateringTime = ((ml_to_give * 200) / 5) + millisec_to_adjust_water;  // 20000/500 millesimi/ml -- ci ha messo 20 secondi per fare mezzo litro
-
+  updateData();
 
   display.clearDisplay();
   printOnScreen((String)umid_to_water, 2, 0, 0);
-  printOnScreen("%", 2, 30, 0);
+  printOnScreen("%", 2, 34, 0);
   printOnScreen((String)ml_to_give, 2, 50, 0);
   printOnScreen((String)millisec_to_adjust_water, 2, 0, 16);
-  printOnScreen(",", 2, 28, 16);
-  printOnScreen((String)ora_a, 2, 38, 16);
-  printOnScreen(":", 2, 66, 16);
-  printOnScreen((String)min_a, 2, 70, 16);
+  printOnScreen("|", 2, 34, 16);
+  printOnScreen((String)ora_a, 2, 64, 16);
+  printOnScreen(":", 2, 74, 16);
+  printOnScreen((String)min_a, 2, 72, 16);
 
   //Messaggio di benvenuto----------------
-
   delay(3000);
   display.clearDisplay();
   printOnScreen("Welcome", 2, 0, 0);
   display.clearDisplay();
   delay(1000);
+  if (!rtc.begin()) {
+    display.clearDisplay();
+    printOnScreen("RTC error", 2, 0, 0);
+    delay(2000);
+  } else {
+    display.clearDisplay();
+    DateTime now = rtc.now();
+    hourInt = now.hour();
+    minInt = now.minute();
+    printOnScreen(String(hourInt), 2, 0, 0);
+    printOnScreen(":", 2, 25, 0);
+    printOnScreen(String(minInt), 2, 55, 0);
+    delay(2000);
+    next_update = minInt;
+  }
+}
+
+/*
+will read the data and update the interval time to water
+*/
+void updateData() {
+  readData();
+  millisWateringTime = ((ml_to_give * 200) / 5) + millisec_to_adjust_water;  // 20000/500 millesimi/ml -- ci ha messo 20 secondi per fare mezzo litro
 }
 
 
@@ -270,21 +273,24 @@ void askData(void) {
 
 
 void loop() {
-  DateTime now = rtc.now();
-  int hourInt = now.hour();
-  String hours = String(hourInt);
-  int minInt = now.minute();
-  String minss = String(minInt);
+
   unsigned long currentMillis = millis();
 
-  //READING---------------------------------------------------------------
+  //READING DATA---------------------------------------------------------------
   if (currentMillis - previousMillisData >= intervalData) {
     previousMillisData = currentMillis;
     if (!dataIsRead) {
-      HA = (String)((int)dht.readHumidity());
-      TA = (String)dht.readTemperature();
+      HA = String((int)dht.readHumidity());
+      TA = String(dht.readTemperature());
       HT = ((int)sht20.readHumidity());
-      TT = (String)sht20.readTemperature();
+      TT = String(sht20.readTemperature());
+      //RTC data
+      DateTime now = rtc.now();
+      hourInt = now.hour();
+      minInt = now.minute();
+      if (HT > 100) {  //è capitato che valesse 101
+        HT = 100;
+      }
       dataIsRead = true;
     } else {
       dataIsRead = false;
@@ -292,22 +298,9 @@ void loop() {
   }
 
 
-  //RIDEFINISCO L'OUTPUT--------------------------------------------------
-  if (hourInt < 10) {
-    hours = "0" + hours;
-  }
-  if (minInt < 10) {
-    minss = "0" + minss;
-  }
-  if (HT > 100) {
-    HT = 100;
-  }
-
-
   //IRRIGAZIONE -----------------------------------------------------------
-  // if millilitri = 0 -> automatico
   if (!annaffiato) {
-    // if ((hourInt >= ora_a) && (hourInt <= (ora_a + 10))) {
+    // if((hourInt >= ora_a) && (hourInt <= (ora_a + 10))) {
     if (currentMillis - timer >= millisWateringTime) {
       timer = currentMillis;
       if (!motorState) {
@@ -316,58 +309,57 @@ void loop() {
       } else {
         digitalWrite(MOTOR, LOW);
         motorState = false;
-        waitToCheck = true;
+        waitToCheck = true;  //mi server per il controllo sotto, altrimenti entra subito nel timer;
         annaffiato = true;
-        //mi server per il controllo sotto, altrimenti entra subito nel timer;
       }
     }
     // }
   }
-  //controllo HT dopo tot tempo altrimenti torna falso dopo l'irrigazione a millilitri
 
+  //controllo HT dopo tot tempo altrimenti torna falso dopo l'irrigazione a millilitri
   if (waitToCheck == false) {
     if (HT <= umid_to_water) {
       annaffiato = false;
     }
   } else {
-    if (currentMillis - timer >= 120000) {  //due minuti  di attesa
+    if (currentMillis - timer >= 120000) {  //due minuti  di attesa da appena finisco di irrigare
       waitToCheck = false;
     }
   }
+
 
   //DISPLAY----------------------------------------------------------------
   if (currentMillis - previousMillisDisplay >= intervalDisplay) {
     previousMillisDisplay = currentMillis;
     if (!displayState) {
-      //display.clearDisplay();
       printOnScreen(HA, 2, 0, 0);
-      printOnScreen("%", 2, 33, 0);
-      printOnScreen(TA, 2, 60, 0);
+      printOnScreen("%", 2, 34, 0);
+      printOnScreen(TA, 2, 64, 0);
       printOnScreen((String)HT, 2, 0, 16);
-      printOnScreen("%", 2, 33, 16);
-      printOnScreen(TT, 2, 60, 16);
+      printOnScreen("%", 2, 34, 16);
+      printOnScreen(TT, 2, 64, 16);
       displayState = true;
-      intervalDisplay -= 3000;  //display will last 1 second
-
+      intervalDisplay = 2000;  //time data view
     } else {
       display.clearDisplay();
       display.display();
-      intervalDisplay += 3000;  //black display will last 4 second
+      intervalDisplay = 4000;  //time black screen
       displayState = false;
     }
   }
 
 
   // INVIO DATI------------------------------------------------------------
-  if(minInt == 10 || minInt == 35 ){
-    data_sent = false;
-  }
-
-  if (data_sent == false  && (minInt == 30 || minInt == 0)) {
-    data_sent = true;
-    minToSetFleg = minInt;
+  if (minInt == next_update) {
+    next_update = minInt + 30;  //30 sono i minuti di attesa prima di aggiornare
+    if (next_update > 59) {
+      next_update -= 60;
+    }
     display.clearDisplay();
     printOnScreen("Sending data", 2, 0, 0);
-    sendDataToSite(hours, minss, TA, TT, HA, (String)HT);
+    sendDataToSite(String(hourInt), String(minInt), TA, TT, HA, (String)HT);
   }
+
+
+  //AGGIORNAMENTO DATI-----------------------------------------------------
 }
