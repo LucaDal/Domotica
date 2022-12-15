@@ -38,8 +38,13 @@ int millisec_to_adjust_water = 0;
 int ora_a = 0;
 int min_a = 0;
 
-int next_update = 0;  //minute to send data
+int next_update = 0;          //minute to send data
+int cont_to_update_data = 0;  //ogni volta che invio dati aggiorno questo contatore
 int minToSetFleg;
+//irrigazione dati
+int oraFineIrrigazione = 0;
+const int intervallo = 10;
+
 
 int hourInt;
 int minInt;
@@ -58,7 +63,7 @@ bool waitToCheck = false;
 unsigned long previousMillisData = 0;
 const unsigned long intervalData = 10000;  //acquisition time and data
 unsigned long previousMillisDisplay = 0;
-unsigned long intervalDisplay = 2000; //start displaing data for 2 second
+unsigned long intervalDisplay = 2000;  //start displaing data for 2 second
 bool displayState = false;
 bool motorState = false;
 bool dataIsRead = false;
@@ -95,24 +100,24 @@ void setup() {
     display.clearDisplay();
     printOnScreen("Connected", 2, 0, 0);
     delay(1000);
-    askData();
+    askDataFromSiteAndUpdateEEPROM();  //Leggo i parametri dal sito
   } else {
     display.clearDisplay();
     printOnScreen("Error with WiFi", 1, 0, 0);
+    readDataFromEEPROM();
     delay(2000);
   }
-  //Leggo i parametri dal sito
-  updateData();
+
 
   display.clearDisplay();
-  printOnScreen((String)umid_to_water, 2, 0, 0);
+  printOnScreen(String(umid_to_water), 2, 0, 0);
   printOnScreen("%", 2, 34, 0);
-  printOnScreen((String)ml_to_give, 2, 50, 0);
-  printOnScreen((String)millisec_to_adjust_water, 2, 0, 16);
-  printOnScreen("|", 2, 34, 16);
-  printOnScreen((String)ora_a, 2, 64, 16);
-  printOnScreen(":", 2, 74, 16);
-  printOnScreen((String)min_a, 2, 72, 16);
+  printOnScreen(String(ml_to_give), 2, 50, 0);
+  printOnScreen(String(millisec_to_adjust_water), 2, 0, 16);
+  printOnScreen("|", 2, 55, 16);
+  printOnScreen(String(ora_a), 2, 63, 16);
+  printOnScreen("->", 1, 96, 22);
+  printOnScreen(String(oraFineIrrigazione), 2, 108, 16);
 
   //Messaggio di benvenuto----------------
   delay(3000);
@@ -138,11 +143,14 @@ void setup() {
 }
 
 /*
-will read the data and update the interval time to water
+will read the data from the db and it will update the interval time to water
 */
-void updateData() {
-  readData();
-  millisWateringTime = ((ml_to_give * 200) / 5) + millisec_to_adjust_water;  // 20000/500 millesimi/ml -- ci ha messo 20 secondi per fare mezzo litro
+void updateIrrigationData() {
+  millisWateringTime = (((ml_to_give - 150) * 200) / 5) + millisec_to_adjust_water;  // 20000/500 millesimi/ml -- ci ha messo 20 secondi per fare mezzo litro 150 valore correttivo temporaneo
+  oraFineIrrigazione = ora_a + intervallo;
+  if (oraFineIrrigazione > 24) {
+    oraFineIrrigazione -= 24;
+  }
 }
 
 
@@ -175,7 +183,7 @@ int getValureFromEEPROM(int *index) {
 }
 
 
-void readData(void) {
+void readDataFromEEPROM(void) {
   Serial.printf("leggo da EEPROM\n");
   int index = 0;
   umid_to_water = EEPROM.read(index);
@@ -183,6 +191,7 @@ void readData(void) {
   millisec_to_adjust_water = getValureFromEEPROM(&index);
   ora_a = EEPROM.read(++index);
   min_a = EEPROM.read(++index);
+  updateIrrigationData();
 }
 
 
@@ -203,7 +212,7 @@ void writeStringToEEPROM(int *index, String str, bool *flag) {
 }
 
 
-void updateData(int *umid, int *ml, int *sec, int *oraa, int *mina) {
+void updateEEPROM(int *umid, int *ml, int *sec, int *oraa, int *mina) {
   bool flag = false;
   int index = 0;
   if (*umid != EEPROM.read(index)) {
@@ -244,7 +253,7 @@ String getValue(String data, char separator, int index) {
 }
 
 
-void askData(void) {
+void askDataFromSiteAndUpdateEEPROM(void) {
   if ((WiFi.status() == WL_CONNECTED)) {
     //Serial.print("[HTTPS] begin...\n");
     if (http.begin(client, "http://dalessandroluca.altervista.org/Projects/requestFromPlant.php?device_name=oJd4K")) {
@@ -253,13 +262,14 @@ void askData(void) {
       if (httpCode > 0) {
         if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
           String payload = http.getString();
-          int umid = getValue(payload, ';', 0).toInt();
-          int ml = getValue(payload, ';', 1).toInt();
-          int sec = getValue(payload, ';', 2).toInt();
-          int oraa = getValue(payload, ';', 3).toInt();
-          int mina = getValue(payload, ';', 4).toInt();
+          umid_to_water = getValue(payload, ';', 0).toInt();
+          ml_to_give = getValue(payload, ';', 1).toInt();
+          millisec_to_adjust_water = getValue(payload, ';', 2).toInt();
+          ora_a = getValue(payload, ';', 3).toInt();
+          min_a = getValue(payload, ';', 4).toInt();
           //Serial.printf("letto: umid: %i,ml: %i,sec: %i,oraa: %i,mina: %i\n",umid,ml,sec,oraa,mina );
-          updateData(&umid, &ml, &sec, &oraa, &mina);
+          updateEEPROM(&umid_to_water, &ml_to_give, &millisec_to_adjust_water, &ora_a, &min_a);
+          updateIrrigationData();
         }
       }
     } else {
@@ -272,8 +282,22 @@ void askData(void) {
 }
 
 
-void loop() {
+void annaffia(unsigned long *currentMillis) {
+  if (*currentMillis - timer >= millisWateringTime) {
+    timer = *currentMillis;
+    if (!motorState) {
+      digitalWrite(MOTOR, HIGH);
+      motorState = true;
+    } else {
+      digitalWrite(MOTOR, LOW);
+      motorState = false;
+      waitToCheck = true;  //mi server per il controllo sotto, altrimenti entra subito nel timer;
+      annaffiato = true;
+    }
+  }
+}
 
+void loop() {
   unsigned long currentMillis = millis();
 
   //READING DATA---------------------------------------------------------------
@@ -300,22 +324,16 @@ void loop() {
 
   //IRRIGAZIONE -----------------------------------------------------------
   if (!annaffiato) {
-    // if((hourInt >= ora_a) && (hourInt <= (ora_a + 10))) {
-    if (currentMillis - timer >= millisWateringTime) {
-      timer = currentMillis;
-      if (!motorState) {
-        digitalWrite(MOTOR, HIGH);
-        motorState = true;
-      } else {
-        digitalWrite(MOTOR, LOW);
-        motorState = false;
-        waitToCheck = true;  //mi server per il controllo sotto, altrimenti entra subito nel timer;
-        annaffiato = true;
+    if ((ora_a + intervallo) > 24) {
+      if (!((hourInt >= oraFineIrrigazione) && (hourInt <= ora_a)) || motorState) {
+        annaffia(&currentMillis);
+      }
+    }else {
+      if (((hourInt >= ora_a) && (hourInt <= oraFineIrrigazione)) || motorState) {
+        annaffia(&currentMillis);
       }
     }
-    // }
   }
-
   //controllo HT dopo tot tempo altrimenti torna falso dopo l'irrigazione a millilitri
   if (waitToCheck == false) {
     if (HT <= umid_to_water) {
@@ -343,23 +361,25 @@ void loop() {
     } else {
       display.clearDisplay();
       display.display();
-      intervalDisplay = 4000;  //time black screen
+      intervalDisplay = 6000;  //time black screen
       displayState = false;
     }
   }
 
 
-  // INVIO DATI------------------------------------------------------------
+  // AGGIORNAMENTO DATI------------------------------------------------------------
   if (minInt == next_update) {
     next_update = minInt + 30;  //30 sono i minuti di attesa prima di aggiornare
     if (next_update > 59) {
       next_update -= 60;
     }
+    cont_to_update_data += 1;
+    if (cont_to_update_data == 12) {  //ogni 6 ore aggiorno i dati poiche aggiorno ogni mezzora 12/2
+      cont_to_update_data = 0;
+      askDataFromSiteAndUpdateEEPROM();
+    }
     display.clearDisplay();
     printOnScreen("Sending data", 2, 0, 0);
-    sendDataToSite(String(hourInt), String(minInt), TA, TT, HA, (String)HT);
+    sendDataToSite(String(hourInt), String(minInt), TA, TT, HA, String(HT));
   }
-
-
-  //AGGIORNAMENTO DATI-----------------------------------------------------
 }

@@ -10,21 +10,21 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT);
 #include <Wire.h>
 
 RTC_DS1307 rtc;
-char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+char daysOfTheWeek[7][12] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
-void setup () {
+void setup() {
   Wire.begin(2, 0);
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
-  if (! rtc.begin()) {
-    printOnScreen("error rtc",1,0,0);
+  if (!rtc.begin()) {
+    printOnScreen("error rtc", 1, 0, 0);
     while (1) delay(100);
   }
 
-  if (! rtc.isrunning()) {
-    printOnScreen("error rtc",1,0,0);
+  if (!rtc.isrunning()) {
+    printOnScreen("error rtc", 1, 0, 0);
   }
-  rtc.adjust(DateTime(2022, 11, 30, 20, 20, 0));
+  rtc.adjust(DateTime(2022, 12, 15, 16, 24, 0));
 }
 
 void printOnScreen(String text, int sizeText, int x, int y) {
@@ -35,13 +35,13 @@ void printOnScreen(String text, int sizeText, int x, int y) {
   display.display();
 }
 
-void loop () {
-    DateTime now = rtc.now();
-    String hours = String(now.hour());
-    String minss = String(now.minute());
-    printOnScreen(hours,2,0,0);
-    printOnScreen(":",2,25,0);
-    printOnScreen(minss,2,55,0);
-    display.clearDisplay();
-    delay(1000);
+void loop() {
+  DateTime now = rtc.now();
+  String hours = String(now.hour());
+  String minss = String(now.minute());
+  printOnScreen(hours, 2, 0, 0);
+  printOnScreen(":", 2, 25, 0);
+  printOnScreen(minss, 2, 55, 0);
+  display.clearDisplay();
+  delay(1000);
 }
