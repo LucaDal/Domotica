@@ -284,7 +284,11 @@ void askDataFromSiteAndUpdateEEPROM(void) {
   }
 }
 
-
+/*
+attivo il motorino per tot tempo dato da millisWateringTime,
+nella seconda volta che entro spengo il motorino, segnalo dell'avvenuta irrigazione
+e faccio eseguire un controllo sull'umidità solo dopo tot tempo impostato sotto settandowaiToCkeck a true
+*/
 void annaffia(unsigned long *currentMillis) {
   if (*currentMillis - timer >= millisWateringTime) {
     timer = *currentMillis;
@@ -337,7 +341,7 @@ void loop() {
       }
     }
   }
-  //controllo HT dopo tot tempo altrimenti torna falso dopo l'irrigazione a millilitri
+  //controllo HT dopo tot tempo poichè necessita di un po di tempo per tornare sopra umid_to_water
   if (waitToCheck == false) {
     if (HT <= umid_to_water) {
       annaffiato = false;
