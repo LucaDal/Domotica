@@ -29,7 +29,7 @@ char daysOfTheWeek[7][12] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thurs
 RTC_DS1307 rtc;
 
 #include <ESP8266WiFi.h>
-const char *ssid = "Vodafone-A82448034";
+const char *ssid = "Vodafone-A82448034";  //4
 const char *password = "2piedinidimoira";
 
 int umid_to_water = 0;
@@ -90,11 +90,14 @@ void setup() {
   dht.begin();
 
   int cont = 20;
-  while ((WiFi.status() != WL_CONNECTED) || cont == 0) {
+  while ((WiFi.status() != WL_CONNECTED)) {
     display.clearDisplay();
     printOnScreen("Connection...", 2, 0, 0);
     delay(500);
     cont--;
+    if (cont < 0) {
+      break;
+    }
   }
   if (WiFi.status() == WL_CONNECTED) {
     display.clearDisplay();
@@ -148,7 +151,7 @@ will read the data from the db and it will update the interval time to water
 void updateIrrigationData() {
   millisWateringTime = (((ml_to_give - 150) * 200) / 5) + millisec_to_adjust_water;  // 20000/500 millesimi/ml -- ci ha messo 20 secondi per fare mezzo litro 150 valore correttivo temporaneo
   oraFineIrrigazione = ora_a + intervallo;
-  if (oraFineIrrigazione > 24) {
+  if (oraFineIrrigazione >= 24) {
     oraFineIrrigazione -= 24;
   }
 }
@@ -325,10 +328,10 @@ void loop() {
   //IRRIGAZIONE -----------------------------------------------------------
   if (!annaffiato) {
     if ((ora_a + intervallo) > 24) {
-      if (!((hourInt >= oraFineIrrigazione) && (hourInt <= ora_a)) || motorState) {
+      if (((hourInt >= ora_a) && (hourInt <= 24)) || ((hourInt >= 0) && (hourInt <= oraFineIrrigazione)) || motorState) {
         annaffia(&currentMillis);
       }
-    }else {
+    } else {
       if (((hourInt >= ora_a) && (hourInt <= oraFineIrrigazione)) || motorState) {
         annaffia(&currentMillis);
       }
@@ -374,8 +377,10 @@ void loop() {
       next_update -= 60;
     }
     cont_to_update_data += 1;
-    if (cont_to_update_data == 12) {  //ogni 6 ore aggiorno i dati poiche aggiorno ogni mezzora 12/2
+    if (cont_to_update_data >= 6) {  //ogni 3 ore aggiorno i dati poiche aggiorno ogni mezzora 12/2
       cont_to_update_data = 0;
+      display.clearDisplay();
+      printOnScreen("asking data", 2, 0, 0);
       askDataFromSiteAndUpdateEEPROM();
     }
     display.clearDisplay();

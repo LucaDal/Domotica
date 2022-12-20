@@ -24,7 +24,7 @@ void setup() {
   if (!rtc.isrunning()) {
     printOnScreen("error rtc", 1, 0, 0);
   }
-  rtc.adjust(DateTime(2022, 12, 15, 16, 24, 0));
+  rtc.adjust(DateTime(2022, 12, 16, 17, 39, 0));
 }
 
 void printOnScreen(String text, int sizeText, int x, int y) {
