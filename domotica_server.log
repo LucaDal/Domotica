@@ -1,0 +1,542 @@
+*** Starting uWSGI 2.0.22 (64bit) on [Thu Sep 14 17:33:33 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x7cd004fee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 218712 bytes (213 KB) for 2 cores
+*** Operational MODE: preforking ***
+Traceback (most recent call last):
+  File "/userdata/media/0/Projects/Domotica/wsgi.py", line 1, in <module>
+    from domotica_server import app
+  File "/userdata/media/0/Projects/Domotica/domotica_server.py", line 1, in <module>
+    from flask import Flask
+ModuleNotFoundError: No module named 'flask'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 746299)
+spawned uWSGI worker 1 (pid: 746307, cores: 1)
+spawned uWSGI worker 2 (pid: 746309, cores: 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 746309|app: -1|req: -1/1] 37.117.115.126 () {56 vars in 1075 bytes} [Thu Sep 14 17:38:59 2023] GET /domotica => generated 21 bytes in 3 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 0)
+SIGINT/SIGTERM received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket domotica_server.sock removed.
+*** Starting uWSGI 2.0.22 (64bit) on [Thu Sep 14 17:41:00 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x76a776fee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 218712 bytes (213 KB) for 2 cores
+*** Operational MODE: preforking ***
+Traceback (most recent call last):
+  File "/userdata/media/0/Projects/Domotica/wsgi.py", line 1, in <module>
+    from domotica_server import app
+  File "/userdata/media/0/Projects/Domotica/domotica_server.py", line 1, in <module>
+    from flask import Flask
+ModuleNotFoundError: No module named 'flask'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 751970)
+spawned uWSGI worker 1 (pid: 751978, cores: 1)
+spawned uWSGI worker 2 (pid: 751979, cores: 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 751979|app: -1|req: -1/1] 37.117.115.126 () {58 vars in 1106 bytes} [Thu Sep 14 17:42:04 2023] GET /domotica => generated 21 bytes in 1 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 751979|app: -1|req: -1/2] 37.117.115.126 () {58 vars in 1106 bytes} [Thu Sep 14 17:42:07 2023] GET /domotica => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+SIGINT/SIGTERM received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket domotica_server.sock removed.
+*** Starting uWSGI 2.0.22 (64bit) on [Thu Sep 14 17:52:00 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x7dcc69fee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 218712 bytes (213 KB) for 2 cores
+*** Operational MODE: preforking ***
+Traceback (most recent call last):
+  File "/userdata/media/0/Projects/Domotica/wsgi.py", line 1, in <module>
+    from domotica_server import app
+  File "/userdata/media/0/Projects/Domotica/domotica_server.py", line 1, in <module>
+    from flask import Flask
+ModuleNotFoundError: No module named 'flask'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 760486)
+spawned uWSGI worker 1 (pid: 760489, cores: 1)
+spawned uWSGI worker 2 (pid: 760490, cores: 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 760489|app: -1|req: -1/1] 37.117.115.126 () {58 vars in 1106 bytes} [Thu Sep 14 17:53:18 2023] GET /domotica => generated 21 bytes in 2 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 760490|app: -1|req: -1/2] 37.117.115.126 () {58 vars in 1106 bytes} [Thu Sep 14 17:53:20 2023] GET /domotica => generated 21 bytes in 1 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 760489|app: -1|req: -1/3] 37.117.115.126 () {60 vars in 1128 bytes} [Thu Sep 14 17:53:23 2023] GET /domotica => generated 21 bytes in 1 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 0)
+SIGINT/SIGTERM received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket domotica_server.sock removed.
+*** Starting uWSGI 2.0.22 (64bit) on [Thu Sep 14 17:58:50 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x715716fee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 218712 bytes (213 KB) for 2 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 7 seconds on interpreter 0x715716fee8 pid: 765674 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 765674)
+spawned uWSGI worker 1 (pid: 765767, cores: 1)
+spawned uWSGI worker 2 (pid: 765768, cores: 1)
+[pid: 765767|app: 0|req: 1/1] 37.117.115.126 () {58 vars in 1106 bytes} [Thu Sep 14 17:58:57 2023] GET /domotica => generated 207 bytes in 128 msecs (HTTP/1.1 404) 2 headers in 87 bytes (1 switches on core 0)
+SIGINT/SIGTERM received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket domotica_server.sock removed.
+*** Starting uWSGI 2.0.22 (64bit) on [Thu Sep 14 18:00:17 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x74a651fee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 145808 bytes (142 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 7 seconds on interpreter 0x74a651fee8 pid: 766802 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 766802)
+spawned uWSGI worker 1 (pid: 766896, cores: 1)
+SIGINT/SIGTERM received...killing workers...
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket domotica_server.sock removed.
+*** Starting uWSGI 2.0.22 (64bit) on [Thu Sep 14 18:00:57 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x740945fee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 145808 bytes (142 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 5 seconds on interpreter 0x740945fee8 pid: 767289 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 767289)
+spawned uWSGI worker 1 (pid: 767367, cores: 1)
+[pid: 767367|app: 0|req: 1/1] 37.117.115.126 () {58 vars in 1106 bytes} [Thu Sep 14 18:01:03 2023] GET /domotica => generated 44 bytes in 100 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 767367|app: 0|req: 2/2] 37.117.115.126 () {58 vars in 1106 bytes} [Thu Sep 14 18:20:19 2023] GET /domotica => generated 44 bytes in 132 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+SIGINT/SIGTERM received...killing workers...
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket domotica_server.sock removed.
+*** Starting uWSGI 2.0.22 (64bit) on [Thu Sep 14 18:38:31 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x7a0eeefee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 145808 bytes (142 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 8 seconds on interpreter 0x7a0eeefee8 pid: 792106 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 792106)
+spawned uWSGI worker 1 (pid: 792213, cores: 1)
+[pid: 792213|app: 0|req: 1/1] 37.117.115.126 () {56 vars in 1089 bytes} [Thu Sep 14 19:18:41 2023] GET /domotica/api/ok => generated 2 bytes in 5075 msecs (HTTP/1.1 200) 2 headers in 78 bytes (1 switches on core 0)
+*** Starting uWSGI 2.0.22 (64bit) on [Thu Sep 14 19:20:46 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x755535fee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 145808 bytes (142 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 3 seconds on interpreter 0x755535fee8 pid: 1083 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1083)
+spawned uWSGI worker 1 (pid: 1569, cores: 1)
+[pid: 1569|app: 0|req: 1/1] 37.117.115.126 () {56 vars in 1075 bytes} [Thu Sep 14 19:24:58 2023] GET /domotica => generated 44 bytes in 143 msecs (HTTP/1.1 200) 2 headers in 79 bytes (2 switches on core 0)
+[pid: 1569|app: 0|req: 2/2] 37.117.115.126 () {56 vars in 1089 bytes} [Thu Sep 14 19:25:04 2023] GET /domotica/api/ok => generated 2 bytes in 15 msecs (HTTP/1.1 200) 2 headers in 78 bytes (1 switches on core 0)
+SIGINT/SIGTERM received...killing workers...
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket domotica_server.sock removed.
+*** Starting uWSGI 2.0.22 (64bit) on [Thu Sep 14 23:31:40 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x7e0088fee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 145808 bytes (142 KB) for 1 cores
+*** Operational MODE: single process ***
+Traceback (most recent call last):
+  File "/userdata/media/0/Projects/Domotica/wsgi.py", line 1, in <module>
+    from domotica_server import app
+  File "/userdata/media/0/Projects/Domotica/domotica_server.py", line 8
+    with open("/home/droidian/Projects/Scripts/fingerp
+              ^
+SyntaxError: unterminated string literal (detected at line 8)
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 197792)
+spawned uWSGI worker 1 (pid: 197802, cores: 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 197802|app: -1|req: -1/1] 37.117.115.126 () {56 vars in 1115 bytes} [Thu Sep 14 23:32:06 2023] GET /domotica/api/get/fingerprint => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+SIGINT/SIGTERM received...killing workers...
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket domotica_server.sock removed.
+*** Starting uWSGI 2.0.22 (64bit) on [Thu Sep 14 23:33:25 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x7a3d19fee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 145808 bytes (142 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 4 seconds on interpreter 0x7a3d19fee8 pid: 199169 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 199169)
+spawned uWSGI worker 1 (pid: 199237, cores: 1)
+[pid: 199237|app: 0|req: 1/1] 37.117.115.126 () {56 vars in 1125 bytes} [Thu Sep 14 23:33:30 2023] GET /domotica/api/get/fingerprint/fsdf => generated 59 bytes in 123 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 199237|app: 0|req: 2/2] 37.117.115.126 () {56 vars in 1115 bytes} [Fri Sep 15 00:39:08 2023] GET /domotica/api/get/fingerprint => generated 207 bytes in 47 msecs (HTTP/1.1 404) 2 headers in 87 bytes (1 switches on core 0)
+[pid: 199237|app: 0|req: 3/3] 37.117.115.126 () {56 vars in 1117 bytes} [Fri Sep 15 00:39:13 2023] GET /domotica/api/get/fingerprint/ => generated 207 bytes in 11 msecs (HTTP/1.1 404) 2 headers in 87 bytes (1 switches on core 0)
+[pid: 199237|app: 0|req: 4/4] 37.117.115.126 () {56 vars in 1121 bytes} [Fri Sep 15 00:39:18 2023] GET /domotica/api/get/fingerprint/gg => generated 59 bytes in 13 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+*** Starting uWSGI 2.0.22 (64bit) on [Fri Sep 15 13:01:54 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x7581e6fee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 145808 bytes (142 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 3 seconds on interpreter 0x7581e6fee8 pid: 1066 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1066)
+spawned uWSGI worker 1 (pid: 1524, cores: 1)
+[pid: 1524|app: 0|req: 1/1] 37.117.115.126 () {56 vars in 1121 bytes} [Fri Sep 15 13:16:03 2023] GET /domotica/api/get/fingerprint/gg => generated 59 bytes in 250 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 1524|app: 0|req: 2/2] 37.117.115.126 () {56 vars in 1121 bytes} [Fri Sep 15 13:55:18 2023] GET /domotica/api/get/fingerprint/gg => generated 59 bytes in 15 msecs (HTTP/1.1 200) 2 headers in 79 bytes (2 switches on core 0)
+SIGINT/SIGTERM received...killing workers...
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket domotica_server.sock removed.
+*** Starting uWSGI 2.0.22 (64bit) on [Fri Sep 15 13:58:37 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x6fc95efee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 145808 bytes (142 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 5 seconds on interpreter 0x6fc95efee8 pid: 46325 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 46325)
+spawned uWSGI worker 1 (pid: 46395, cores: 1)
+[pid: 46395|app: 0|req: 1/1] 37.117.115.126 () {56 vars in 1115 bytes} [Fri Sep 15 13:58:42 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 99 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 2/2] 37.117.115.126 () {56 vars in 1115 bytes} [Fri Sep 15 14:08:55 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 14 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 3/3] 37.117.115.126 () {56 vars in 1095 bytes} [Fri Sep 15 14:10:09 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 31 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 4/4] 37.117.115.126 () {56 vars in 1115 bytes} [Fri Sep 15 14:12:44 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 9 msecs (HTTP/1.1 200) 2 headers in 79 bytes (2 switches on core 0)
+[pid: 46395|app: 0|req: 5/5] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 14:28:23 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 24 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 6/6] 37.117.115.126 () {56 vars in 1115 bytes} [Fri Sep 15 14:57:34 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 13 msecs (HTTP/1.1 200) 2 headers in 79 bytes (2 switches on core 0)
+[pid: 46395|app: 0|req: 7/7] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 16:25:22 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 8 msecs (HTTP/1.1 200) 2 headers in 79 bytes (2 switches on core 0)
+[pid: 46395|app: 0|req: 8/8] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 16:42:41 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 19 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 9/9] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 16:44:27 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 8 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 10/10] 37.117.115.126 () {56 vars in 1095 bytes} [Fri Sep 15 16:57:56 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 18 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 11/11] 66.249.81.2 () {38 vars in 505 bytes} [Fri Sep 15 16:58:00 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 7 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 12/12] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 17:11:47 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 9 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 13/13] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 17:14:02 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 11 msecs (HTTP/1.1 200) 2 headers in 79 bytes (2 switches on core 0)
+[pid: 46395|app: 0|req: 14/14] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 17:26:20 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 8 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 15/15] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 17:41:44 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 18 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 16/16] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 17:47:09 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 6 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 17/17] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 17:53:31 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 36 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 18/18] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 18:14:52 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 8 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 19/19] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 18:15:34 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 8 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 20/20] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 18:17:12 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 14 msecs (HTTP/1.1 200) 2 headers in 79 bytes (2 switches on core 0)
+[pid: 46395|app: 0|req: 21/21] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 18:17:46 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 19 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 22/22] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 18:21:54 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 13 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 23/23] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 18:27:18 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 10 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 24/24] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 20:04:19 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 10 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 25/25] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 20:06:30 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 9 msecs (HTTP/1.1 200) 2 headers in 79 bytes (2 switches on core 0)
+[pid: 46395|app: 0|req: 26/26] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 20:34:51 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 12 msecs (HTTP/1.1 200) 2 headers in 79 bytes (2 switches on core 0)
+[pid: 46395|app: 0|req: 27/27] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 20:34:52 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 8 msecs (HTTP/1.1 200) 2 headers in 79 bytes (2 switches on core 0)
+[pid: 46395|app: 0|req: 28/28] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 20:34:55 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 14 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 29/29] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 20:34:56 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 10 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 30/30] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 20:37:57 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 11 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 31/31] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 20:40:13 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 7 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 32/32] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 20:48:10 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 13 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 33/33] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 20:48:35 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 8 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 46395|app: 0|req: 34/34] 37.117.115.126 () {36 vars in 524 bytes} [Fri Sep 15 20:52:43 2023] GET /domotica/api/get/fingerprint => generated 59 bytes in 9 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+*** Starting uWSGI 2.0.22 (64bit) on [Sat Sep 16 12:15:50 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x763d7afee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 145808 bytes (142 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 3 seconds on interpreter 0x763d7afee8 pid: 1063 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1063)
+spawned uWSGI worker 1 (pid: 1596, cores: 1)
+*** Starting uWSGI 2.0.22 (64bit) on [Mon Sep 18 13:11:29 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x7c430cfee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 145808 bytes (142 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 5 seconds on interpreter 0x7c430cfee8 pid: 1063 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1063)
+spawned uWSGI worker 1 (pid: 1537, cores: 1)
+SIGINT/SIGTERM received...killing workers...
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket domotica_server.sock removed.
+*** Starting uWSGI 2.0.22 (64bit) on [Thu Sep 21 14:35:30 2023] ***
+compiled with version: 12.2.0 on 09 September 2023 23:25:33
+os: Linux-3.18.120-oneplus-oneplus3 #1 SMP PREEMPT Sat Aug 26 23:23:06 UTC 2023
+nodename: OnePlus3
+machine: aarch64
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /userdata/media/0/Projects/Domotica
+detected binary path: /userdata/media/0/Projects/Domotica/domoticaenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 22134
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address domotica_server.sock fd 3
+Python version: 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]
+Python main interpreter initialized at 0x754b8afee8
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 145808 bytes (142 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 3 seconds on interpreter 0x754b8afee8 pid: 1095 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1095)
+spawned uWSGI worker 1 (pid: 1555, cores: 1)
